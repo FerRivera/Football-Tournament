@@ -1,0 +1,85 @@
+<template>
+  <lightning-card icon-name="custom:custom63">
+    <!-- Title -->
+    <h2 slot="title" class="slds-text-heading_small slds-text-align_center">
+      <template if:true={teamName}> Players – {teamName} </template>
+      <template if:false={teamName}> Team Players </template>
+    </h2>
+
+    <div class="slds-p-around_medium">
+      <!-- No team selected yet -->
+      <template if:false={teamName}>
+        <p class="slds-text-color_weak slds-text-align_center">
+          Select a team in the league table to view its players.
+        </p>
+      </template>
+
+      <!-- Team selected -->
+      <template if:true={teamName}>
+        <!-- Loading state -->
+        <template if:true={isLoading}>
+          <div class="slds-m-vertical_medium slds-align_absolute-center">
+            <lightning-spinner
+              alternative-text="Loading team players"
+            ></lightning-spinner>
+          </div>
+        </template>
+
+        <!-- Loaded state -->
+        <template if:false={isLoading}>
+          <!-- Has players -->
+          <template if:true={hasPlayers}>
+            <table
+              class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"
+            >
+              <thead>
+                <tr class="slds-line-height_reset">
+                  <th scope="col" class="slds-text-align_center">
+                    <div class="slds-truncate" title="#">#</div>
+                  </th>
+                  <th scope="col">
+                    <div class="slds-truncate" title="Player">Player</div>
+                  </th>
+                  <th scope="col">
+                    <div class="slds-truncate" title="Position">Position</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <template for:each={players} for:item="player">
+                  <tr key={player.Id}>
+                    <!-- index / position in the list -->
+                    <td class="slds-text-align_center">{player.position}</td>
+
+                    <!-- player name -->
+                    <td>
+                      <div class="slds-truncate" title={player.Name}>
+                        {player.Name}
+                      </div>
+                    </td>
+
+                    <!-- player position field (adjust name if needed) -->
+                    <td>
+                      <div class="slds-truncate" title={player.Position__c}>
+                        {player.Position__c}
+                      </div>
+                    </td>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </template>
+
+          <!-- Team selected but no players -->
+          <template if:false={hasPlayers}>
+            <p
+              class="slds-text-color_weak slds-text-align_center slds-m-vertical_medium"
+            >
+              No players found for this team.
+            </p>
+          </template>
+        </template>
+      </template>
+    </div>
+  </lightning-card>
+</template>

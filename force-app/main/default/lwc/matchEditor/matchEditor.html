@@ -1,0 +1,55 @@
+<template>
+  <lightning-card title="Create Match" icon-name="custom:custom63">
+    <div class="slds-p-around_medium">
+      <lightning-combobox
+        label="Home Team"
+        options={teamOptions}
+        value={homeTeamId}
+        onchange={handleHomeTeamChange}
+      ></lightning-combobox>
+
+      <lightning-combobox
+        label="Away Team"
+        options={teamOptions}
+        value={awayTeamId}
+        onchange={handleAwayTeamChange}
+      ></lightning-combobox>
+
+      <lightning-input
+        type="number"
+        label="Home Goals"
+        value={homeGoals}
+        onchange={handleHomeTeamGoals}
+      ></lightning-input>
+
+      <lightning-input
+        type="number"
+        label="Away Goals"
+        value={awayGoals}
+        onchange={handleAwayTeamGoals}
+      ></lightning-input>
+
+      <lightning-combobox
+        label="Status"
+        options={statusOptions}
+        value={status}
+        onchange={handleStatusChange}
+      ></lightning-combobox>
+
+      <lightning-input
+        type="date"
+        label="Match Date"
+        value={matchDate}
+        onchange={handleDateChange}
+      ></lightning-input>
+
+      <div class="slds-m-top_medium">
+        <lightning-button
+          label="Create Match"
+          variant="brand"
+          onclick={handleSave}
+        ></lightning-button>
+      </div>
+    </div>
+  </lightning-card>
+</template>

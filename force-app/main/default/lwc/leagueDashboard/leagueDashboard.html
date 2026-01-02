@@ -1,0 +1,20 @@
+<template>
+  <c-team-standings
+    onteamplayers={handleTeamPlayers}
+    teams={teams}
+    error={error}
+  ></c-team-standings>
+
+  <c-team-players
+    team-id={selectedTeamId}
+    team-name={selectedTeamName}
+  ></c-team-players>
+
+  <div class="slds-m-top_medium">
+    <c-match-list onmatchchanged={handleMatchChanged}></c-match-list>
+  </div>
+
+  <div class="slds-m-top_medium">
+    <c-match-editor onmatchcreated={handleMatchCreated}></c-match-editor>
+  </div>
+</template>

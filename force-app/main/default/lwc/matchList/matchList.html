@@ -1,0 +1,59 @@
+<template>
+  <lightning-card title="Recent Matches" icon-name="custom:custom63">
+    <div class="slds-p-around_medium">
+      <template if:true={matches}>
+        <table
+          class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped"
+        >
+          <thead>
+            <tr class="slds-line-height_reset">
+              <th scope="col"><div class="slds-truncate">Date</div></th>
+              <th scope="col"><div class="slds-truncate">Home</div></th>
+              <th scope="col"><div class="slds-truncate">Score</div></th>
+              <th scope="col"><div class="slds-truncate">Away</div></th>
+              <th scope="col"><div class="slds-truncate">Status</div></th>
+              <th scope="col"><div class="slds-truncate">Actions</div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <template for:each={matches} for:item="match">
+              <tr key={match.Id}>
+                <td>
+                  <lightning-formatted-date-time
+                    value={match.Match_Date__c}
+                    year="numeric"
+                    month="short"
+                    day="2-digit"
+                  >
+                  </lightning-formatted-date-time>
+                </td>
+                <td>{match.Home_Team__r.Name}</td>
+                <td>{match.Home_Goal__c} - {match.Away_Goals__c}</td>
+                <td>{match.Away_Team__r.Name}</td>
+                <td>{match.Status__c}</td>
+                <td>
+                  <lightning-button-icon
+                    icon-name="utility:delete"
+                    alternative-text="Delete match"
+                    data-id={match.Id}
+                    onclick={handleDelete}
+                  ></lightning-button-icon>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </template>
+
+      <template if:true={error}>
+        <div class="slds-text-color_error">Error loading matches.</div>
+      </template>
+
+      <template if:true={showEmptyState}>
+        <div class="slds-text-color_weak">
+          No matches yet. Create a match below.
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
