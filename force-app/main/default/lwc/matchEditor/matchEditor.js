@@ -54,6 +54,8 @@ export default class MatchEditor extends LightningElement {
   }
 
   handleSave() {
+    if (this.isSaving) return;
+
     if (!this.homeTeamId || !this.awayTeamId) {
       this.dispatchEvent(
         new ShowToastEvent({

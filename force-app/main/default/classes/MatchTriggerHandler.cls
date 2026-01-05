@@ -31,6 +31,8 @@ public with sharing class MatchTriggerHandler {
     if (playedMatches.isEmpty() && reversedMatches.isEmpty())
       return;
 
+    collectAndSendMatchesIdsForPublisher(playedMatches);
+
     Set<Id> teamIds = new Set<Id>();
 
     for (Match__c m : playedMatches) {
@@ -170,5 +172,18 @@ public with sharing class MatchTriggerHandler {
     teamsToUpdate.add(awayTeam);
 
     return teamsToUpdate;
+  }
+
+  private static void collectAndSendMatchesIdsForPublisher(
+    List<Match__c> matches
+  ) {
+    Set<Id> matchesIds = new Set<Id>();
+    for (Match__c m : matches) {
+      matchesIds.add(m.Id);
+    }
+
+    if (!matchesIds.isEmpty()) {
+      MatchResultWebhookPublisher.publishAsync(matchesIds);
+    }
   }
 }

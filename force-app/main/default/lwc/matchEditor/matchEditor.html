@@ -5,6 +5,7 @@
         label="Home Team"
         options={teamOptions}
         value={homeTeamId}
+        disabled={isSaving}
         onchange={handleHomeTeamChange}
       ></lightning-combobox>
 
@@ -12,6 +13,7 @@
         label="Away Team"
         options={teamOptions}
         value={awayTeamId}
+        disabled={isSaving}
         onchange={handleAwayTeamChange}
       ></lightning-combobox>
 
@@ -19,6 +21,7 @@
         type="number"
         label="Home Goals"
         value={homeGoals}
+        disabled={isSaving}
         onchange={handleHomeTeamGoals}
       ></lightning-input>
 
@@ -26,6 +29,7 @@
         type="number"
         label="Away Goals"
         value={awayGoals}
+        disabled={isSaving}
         onchange={handleAwayTeamGoals}
       ></lightning-input>
 
@@ -33,6 +37,7 @@
         label="Status"
         options={statusOptions}
         value={status}
+        disabled={isSaving}
         onchange={handleStatusChange}
       ></lightning-combobox>
 
@@ -40,6 +45,7 @@
         type="date"
         label="Match Date"
         value={matchDate}
+        disabled={isSaving}
         onchange={handleDateChange}
       ></lightning-input>
 
@@ -47,6 +53,7 @@
         <lightning-button
           label="Create Match"
           variant="brand"
+          disabled={isSaving}
           onclick={handleSave}
         ></lightning-button>
       </div>
